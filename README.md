@@ -6,6 +6,14 @@ Added video recording feature for ElasticFusion (https://github.com/mp3guy/Elast
 Still working on it..
 
 
+
+Manual installation of freenect
+
+
+  https://openkinect.org/wiki/Getting_Started
+  
+  
+  
 For GLUI installation
 
 Need to install two deb
@@ -18,6 +26,4 @@ Download and copy include and lib
 
   http://web.engr.oregonstate.edu/~mjb/cs553/gettingglut.html
   
-Manual installation of freenect
 
-  https://openkinect.org/wiki/Getting_Started
