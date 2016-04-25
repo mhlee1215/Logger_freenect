@@ -263,7 +263,8 @@ void kinect_capture_app::do_glutIdle()
 		if(!recordStarted){
 			//Open file and write headers
 
-			std::string filename = "myfile.klg";
+			std::string filename = getNextFilename();//"myfile.klg";
+			std::cout << filename << std::endl;
 			logFile = fopen(filename.c_str(), "wb+");
 
 		    int32_t numFrames = 0;
@@ -310,6 +311,54 @@ void kinect_capture_app::do_glutIdle()
 		}
 	}
 }
+
+std::string kinect_capture_app::getNextFilename()
+{
+    static char const* const fmt = "%Y-%m-%d";
+    std::ostringstream ss;
+
+    ss.imbue(std::locale(std::cout.getloc(), new boost::gregorian::date_facet(fmt)));
+    ss << boost::gregorian::day_clock::universal_day();
+
+    std::string dateFilename;
+
+    // if(!lastFilename.length())
+    // {
+        dateFilename = ss.str();
+    // }
+    // else
+    // {
+    //     dateFilename = lastFilename;
+    // }
+
+    std::string currentFile;
+
+    int currentNum = 0;
+
+    while(true)
+    {
+        std::stringstream strs;
+        strs << logFolder;
+// #ifdef unix
+        strs << "/";
+// #else
+//         strs << "\\";
+// #endif
+        strs << dateFilename << ".";
+        strs << std::setfill('0') << std::setw(2) << currentNum;
+        strs << ".klg";
+
+        if(!boost::filesystem::exists(strs.str().c_str()))
+        {
+            return strs.str();
+        }
+
+        currentNum++;
+    }
+
+    return "";
+}
+
 
 void kinect_capture_app::do_glutDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -523,6 +572,9 @@ void kinect_capture_app::set_record(int id) {
 	}
 	else{
 		printf("Record start!\n");
+
+		logFolder = "./capture";
+
 		recordedFrameNum = 0;
 		isRecording = true;
 	}

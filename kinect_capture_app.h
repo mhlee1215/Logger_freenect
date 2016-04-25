@@ -10,6 +10,7 @@
 #include "freenect_module.h"
 
 #include <boost/date_time.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
 using namespace boost::posix_time; 
 #include <boost/lexical_cast.hpp>
 #include <boost/filesystem.hpp>
@@ -84,6 +85,7 @@ private:
     bool recordStarted;
     bool isRecording;
     FILE * logFile;
+    std::string logFolder;
 
     /////////////////////////////////////////////////////////////////////////
     // Member functions
@@ -94,6 +96,8 @@ private:
     void save_images();
     void save_registration();
     void disparity2depth(cv::Mat_<uint16_t> &depth, const cv::Mat_<uint16_t> &disp);
+
+    std::string getNextFilename();
 
     void do_glutIdle();
     void do_glutDisplay();
