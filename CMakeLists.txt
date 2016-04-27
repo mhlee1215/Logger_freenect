@@ -59,8 +59,10 @@ include_directories(${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${USB_INCLUDE_DI
 #Glui
 #find_package(libglui2c2 REQUIRED)
 #pkg_search_module(GLUI REQUIRED "/home/mhlee/LIBS/glui-2.36/src")
-set(GLUI_INCLUDE "/home/mhlee/LIBS/glui-2.36/src/include/")
-set(GLUI_LIBRARIES "/home/mhlee/LIBS/glui-2.36/src/lib/libglui.a")
+#set(GLUI_INCLUDE "/home/mhlee/LIBS/glui-2.36/src/include/")
+#set(GLUI_LIBRARIES "/home/mhlee/LIBS/glui-2.36/src/lib/libglui.a")
+set(GLUI_INCLUDE "/usr/include/GL/")
+set(GLUI_LIBRARIES "/usr/lib/libglui.a")
 include_directories(${GLUI_INCLUDE})
 link_directories(${GLUI_LIBRARIES})
 
